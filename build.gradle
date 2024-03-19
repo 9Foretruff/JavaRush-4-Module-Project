@@ -12,6 +12,8 @@ repositories {
 dependencies {
     implementation 'com.mysql:mysql-connector-j:8.3.0'
     implementation 'org.hibernate.orm:hibernate-core:6.4.1.Final'
+    implementation 'org.slf4j:slf4j-api:2.0.7'
+    implementation 'org.slf4j:slf4j-log4j12:2.0.7'
     implementation 'p6spy:p6spy:3.9.1'
     implementation 'io.lettuce:lettuce-core:6.3.1.RELEASE'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
