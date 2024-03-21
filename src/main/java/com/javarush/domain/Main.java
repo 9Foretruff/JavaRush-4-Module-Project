@@ -8,21 +8,15 @@ import com.javarush.domain.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
 public class Main {
-    private final SessionFactory sessionFactory;
-    private final RedisUtil redisUtil;
-
-    private final ObjectMapper mapper;
-
-    private final CityDAO cityDAO;
-    private final CountryDAO countryDAO;
 
     public static void main(String[] args) {
-        sessionFactory = HibernateUtil.getSessionFactory();
-        cityDAO = new CityDAO(sessionFactory);
-        countryDAO = new CountryDAO(sessionFactory);
+        var sessionFactory = HibernateUtil.getSessionFactory();
+        var cityDAO = new CityDAO(sessionFactory);
+        var countryDAO = new CountryDAO(sessionFactory);
 
-        redisUtil = prepareRedisClient();
-        mapper = new ObjectMapper();
+        var redisUtil = RedisUtil.getJedis();
+        var mapper = new ObjectMapper();
+        Menu menu = new Menu(sessionFactory, redisUtil, mapper, cityDAO, countryDAO);
     }
 
 }
