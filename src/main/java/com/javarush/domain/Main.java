@@ -32,6 +32,8 @@ public class Main {
 
         List<CityCountry> preparedData = menu.transformData(allCities);
 
+        menu.pushToRedis(preparedData);
+
         menu.shutdown();
     }
 

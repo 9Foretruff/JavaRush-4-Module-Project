@@ -34,7 +34,7 @@ public class City implements BaseEntity<Integer> {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "country_id")
     @ToString.Exclude
     private Country country;

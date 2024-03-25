@@ -77,7 +77,7 @@ public class Menu {
         }).collect(Collectors.toList());
     }
 
-    private void pushToRedis(List<CityCountry> data) {
+    public void pushToRedis(List<CityCountry> data) {
         try (StatefulRedisConnection<String, String> connection = redisClient.connect()) {
             RedisStringCommands<String, String> sync = connection.sync();
             for (CityCountry cityCountry : data) {
