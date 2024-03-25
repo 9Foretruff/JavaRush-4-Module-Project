@@ -14,7 +14,7 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
-                sessionFactory = buildConfiguration().buildSessionFactory();
+                sessionFactory = buildConfiguration().configure().buildSessionFactory();
                 log.info("SessionFactory initialized successfully.");
             } catch (Exception e) {
                 log.error("Failed to initialize SessionFactory", e);

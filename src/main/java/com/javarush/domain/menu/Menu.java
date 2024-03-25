@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javarush.domain.entity.City;
 import com.javarush.domain.repository.CityRepository;
 import com.javarush.domain.repository.CountryRepository;
-import io.lettuce.core.RedisClient;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,7 +16,7 @@ import static java.util.Objects.nonNull;
 @RequiredArgsConstructor
 public class Menu {
     private final SessionFactory sessionFactory;
-    private final RedisClient redisClient;
+//    private final Jedis jedis;
     private final ObjectMapper mapper;
     private final CityRepository cityRepository;
     private final CountryRepository countryRepository;
@@ -27,7 +26,7 @@ public class Menu {
             List<City> allCities = new ArrayList<>();
             session.beginTransaction();
 
-            int totalCount = cityRepository.getTotalCount();
+            long totalCount = cityRepository.getTotalCount();
             int step = 500;
             for (int i = 0; i < totalCount; i += step) {
                 allCities.addAll(cityRepository.findAll(i, step));
@@ -41,9 +40,9 @@ public class Menu {
         if (nonNull(sessionFactory)) {
             sessionFactory.close();
         }
-        if (nonNull(redisClient)) {
-            redisClient.shutdown();
-        }
+//        if (nonNull(jedis)) {
+//            jedis.shutdown();
+//        }
     }
 
 }

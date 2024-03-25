@@ -1,0 +1,30 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+
+    <!-- Hibernate connection properties -->
+    <property name="hibernate.connection.url">jdbc:p6spy:mysql://localhost:3307/world</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">2006</property>
+    <property name="hibernate.connection.driver_class">com.p6spy.engine.spy.P6SpyDriver</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+<!--    <property name="hibernate.hbm2ddl.auto">validate</property>-->
+
+    <!-- Hibernate dialect -->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+    <!-- Show SQL queries -->
+    <property name="hibernate.show_sql">true</property>
+
+    <!-- Format SQL queries for readability -->
+    <property name="hibernate.format_sql">true</property>
+
+    <!-- Mapping configuration for entity classes -->
+    <mapping class="com.javarush.domain.entity.Country"/>
+    <mapping class="com.javarush.domain.entity.City"/>
+    <mapping class="com.javarush.domain.entity.CountryLanguage"/>
+
+  </session-factory>
+</hibernate-configuration>

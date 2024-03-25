@@ -9,9 +9,9 @@ public class CityRepository extends RepositoryBase<Integer, City> {
         super(entityManager, City.class);
     }
 
-    public int getTotalCount() {
-        var query = getEntityManager().createQuery("select count(c) from City c", Integer.class);
-        return Math.toIntExact(query.getSingleResult());
+    public long getTotalCount() {
+        var query = getEntityManager().createQuery("select count(c) from City c", Long.class);
+        return (long) query.getSingleResult();
     }
 
 }
