@@ -43,7 +43,7 @@ public class Country implements BaseEntity<Integer>{
     private String code;
 
     @Column(name = "code_2")
-    private String code2;
+    private String alternativeCode;
 
     private String name;
 
@@ -78,6 +78,7 @@ public class Country implements BaseEntity<Integer>{
     private String headOfState;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "capital")
     @ToString.Exclude
     private City capital;
 

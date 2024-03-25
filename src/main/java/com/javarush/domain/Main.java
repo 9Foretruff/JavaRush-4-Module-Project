@@ -3,6 +3,8 @@ package com.javarush.domain;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javarush.domain.entity.City;
 import com.javarush.domain.menu.Menu;
+import com.javarush.domain.redis.entity.CityCountry;
+import com.javarush.domain.redis.util.RedisUtil;
 import com.javarush.domain.repository.CityRepository;
 import com.javarush.domain.repository.CountryRepository;
 import com.javarush.domain.util.HibernateUtil;
@@ -22,11 +24,14 @@ public class Main {
         var cityRepository = new CityRepository(session);
         var countryRepository = new CountryRepository(session);
 
-//        var redisClient = RedisUtil.getJedis();
+        var redisClient = RedisUtil.getRedisClient();
         var mapper = new ObjectMapper();
 
-        Menu menu = new Menu(sessionFactory, mapper, cityRepository, countryRepository);
+        Menu menu = new Menu(sessionFactory, redisClient, mapper, cityRepository, countryRepository);
         List<City> allCities = menu.fetchData();
+
+        List<CityCountry> preparedData = menu.transformData(allCities);
+
         menu.shutdown();
     }
 
