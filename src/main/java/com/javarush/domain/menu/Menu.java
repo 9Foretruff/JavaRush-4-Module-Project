@@ -1,52 +1,43 @@
-package com.javarush.domain;
+package com.javarush.domain.menu;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.javarush.domain.dao.CityDAO;
-import com.javarush.domain.dao.CountryDAO;
 import com.javarush.domain.entity.City;
-import com.javarush.domain.redis.util.RedisUtil;
+import com.javarush.domain.repository.CityRepository;
+import com.javarush.domain.repository.CountryRepository;
+import io.lettuce.core.RedisClient;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import redis.clients.jedis.Jedis;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Objects.nonNull;
 
+@RequiredArgsConstructor
 public class Menu {
     private final SessionFactory sessionFactory;
-    private final Jedis redisClient;
-
+    private final RedisClient redisClient;
     private final ObjectMapper mapper;
+    private final CityRepository cityRepository;
+    private final CountryRepository countryRepository;
 
-    private final CityDAO cityDAO;
-    private final CountryDAO countryDAO;
-
-    public Menu(SessionFactory sessionFactory, Jedis redisClient, ObjectMapper mapper, CityDAO cityDAO, CountryDAO countryDAO) {
-        this.sessionFactory = sessionFactory;
-        this.redisClient = redisClient;
-        this.mapper = mapper;
-        this.cityDAO = cityDAO;
-        this.countryDAO = countryDAO;
-    }
-
-    private List<City> fetchData() {
+    public List<City> fetchData() {
         try (Session session = sessionFactory.getCurrentSession()) {
             List<City> allCities = new ArrayList<>();
             session.beginTransaction();
 
-            int totalCount = cityDAO.getTotalCount();
+            int totalCount = cityRepository.getTotalCount();
             int step = 500;
             for (int i = 0; i < totalCount; i += step) {
-                allCities.addAll(cityDAO.getItems(i, step));
+                allCities.addAll(cityRepository.findAll(i, step));
             }
             session.getTransaction().commit();
             return allCities;
         }
     }
 
-    private void shutdown() {
+    public void shutdown() {
         if (nonNull(sessionFactory)) {
             sessionFactory.close();
         }
@@ -54,4 +45,5 @@ public class Menu {
             redisClient.shutdown();
         }
     }
+
 }
