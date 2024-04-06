@@ -34,7 +34,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Country implements BaseEntity<Integer>{
+public class Country {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

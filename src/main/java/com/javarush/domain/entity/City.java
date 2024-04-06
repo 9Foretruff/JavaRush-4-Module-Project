@@ -26,7 +26,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class City implements BaseEntity<Integer> {
+public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

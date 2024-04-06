@@ -30,7 +30,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CountryLanguage implements BaseEntity<Integer> {
+public class CountryLanguage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

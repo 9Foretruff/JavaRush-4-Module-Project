@@ -1,6 +1,5 @@
 package com.javarush.domain.repository;
 
-import com.javarush.domain.entity.BaseEntity;
 import jakarta.persistence.EntityManager;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Getter
-public abstract class RepositoryBase<K extends Serializable, E extends BaseEntity<K>> implements Repository<K, E> {
+public abstract class RepositoryBase<K extends Serializable, E> implements Repository<K, E> {
     private final EntityManager entityManager;
     private final Class<E> clazz;
 
