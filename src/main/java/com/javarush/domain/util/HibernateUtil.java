@@ -1,6 +1,6 @@
 package com.javarush.domain.util;
 
-import com.javarush.domain.exception.SessionFactoryException;
+import com.javarush.domain.exception.SessionFactoryInitializationException;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
@@ -18,7 +18,7 @@ public class HibernateUtil {
                 log.info("SessionFactory initialized successfully.");
             } catch (Exception e) {
                 log.error("Failed to initialize SessionFactory", e);
-                throw new SessionFactoryException("Failed to initialize SessionFactory");
+                throw new SessionFactoryInitializationException("Failed to initialize SessionFactory");
             }
         }
         return sessionFactory;
