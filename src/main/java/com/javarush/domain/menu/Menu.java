@@ -5,7 +5,7 @@ import com.javarush.domain.service.DataPreparationService;
 public class Menu {
 
     public void run() {
-        DataPreparationService.init();
+        new DataPreparationService().init();
     }
 
 }
